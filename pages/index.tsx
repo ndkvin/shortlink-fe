@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Home from '@layouts/home'
-import { Inter } from '@next/font/google'
-const inter = Inter({ subsets: ['latin'] })
+import Hero from '@components/home/hero'
+import Content from "@components/home/content"
+
 
 export default function home() {
   return (
@@ -13,8 +14,12 @@ export default function home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-          <Home />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident optio reiciendis veritatis, neque, facere aperiam vitae dolorem laudantium tempore minima, nisi modi quia itaque eius sed ullam eligendi. Animi ut, sit cupiditate distinctio suscipit optio quaerat quae vero tempore, odit rerum ex corporis nulla ipsa ipsum accusantium ab. Reprehenderit aliquid doloribus eum dicta nobis, ducimus laudantium ipsa molestias repellat quibusdam velit nemo adipisci quo dolores, beatae numquam itaque quidem repellendus accusantium sapiente necessitatibus. Ea quibusdam nesciunt asperiores velit. Excepturi, quis dolorum eos quam ipsum amet eaque cum commodi voluptatibus, aperiam nisi delectus non reiciendis repellat odit reprehenderit, accusamus dicta repellendus.
+          <Home>
+            <>
+              <Hero />
+              <Content />
+            </>
+          </Home>
       </main>
     </>
   )

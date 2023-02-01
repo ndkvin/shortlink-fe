@@ -1,11 +1,18 @@
 import Hero from "@components/home/hero"
 import Navbar from "@components/home/navbar"
+import Footer from "@components/home/footer"
 
-export default function Home() {
+
+type Props = {
+  children: JSX.Element
+}
+
+export default function Home({ children } : Props ) {
   return (
     <>
       <Navbar />
-      <Hero />
+        {children}
+      <Footer />
     </>
   )
 }

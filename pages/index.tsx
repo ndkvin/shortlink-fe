@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Home from '@layouts/home'
 import Hero from '@components/home/hero'
 import Content from "@components/home/content"
+import Faq from '@components/home/faq'
 
 
 export default function home() {
@@ -18,6 +19,7 @@ export default function home() {
             <>
               <Hero />
               <Content />
+              <Faq />
             </>
           </Home>
       </main>

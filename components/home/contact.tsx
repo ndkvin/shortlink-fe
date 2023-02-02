@@ -3,7 +3,7 @@ import { FaInstagram, FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 
 export default function Contact() {
   return (
-    <section className="bg-blue-900 dark:bg-gray-900" id="">
+    <section className="bg-blue-900 dark:bg-gray-900" id="contact">
       <div className="container flex flex-col px-6 py-12 mx-auto">
         <div className="flex-1 lg:flex lg:items-center lg:-mx-6">
           <div className="text-white lg:w-1/2 lg:mx-6">

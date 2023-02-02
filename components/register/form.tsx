@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 
 export default function Form() {
@@ -9,6 +9,11 @@ export default function Form() {
     <>
       <form>
         <div>
+          <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Name</label>
+          <input type="text" name="name" id="email" placeholder="Jhon Chena" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+        </div>
+
+        <div className="mt-6">
           <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email Address</label>
           <input type="email" name="email" id="email" placeholder="example@example.com" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
         </div>
@@ -36,8 +41,10 @@ export default function Form() {
             Sign in
           </button>
         </div>
+
       </form>
-      <p className="mt-6 text-sm text-center text-gray-400">Don&#x27;t have an account yet? <Link href="/register" className="text-blue-500 focus:outline-none focus:underline hover:underline">Sign up</Link>.</p>
+
+      <p className="mt-6 text-sm text-center text-gray-400">Already have an account? <Link href="/login" className="text-blue-500 focus:outline-none focus:underline hover:underline">Sign in</Link>.</p>
     </>
   )
 }

@@ -1,10 +1,10 @@
-import Home from '@layouts/home'
 import Form from '@components/login/form'
+import Auth from '@layouts/auth'
 
 export default function Login() {
   return(
-    <Home>
+    <Auth title='Log in to your account'>
         <Form />
-    </Home>
+    </Auth>
   )
 }

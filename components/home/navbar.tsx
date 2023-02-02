@@ -6,6 +6,7 @@ import { CgClose } from "react-icons/cg"
 export default function Navbar() {
   const [login, setLogin] = useState(false)
   const [open, setOpen] = useState(false)
+
   return (
     <>
       <nav x-data="{ isOpen: false }" className="z-10 sticky top-0 bg-white shadow dark:bg-gray-800">
@@ -55,7 +56,7 @@ export default function Navbar() {
                     </>
                   :
                     <>
-                      <Link href="/login" className="py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Login</Link>
+                      <Link href="/login" className="p-2 -ml-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Login</Link>
                     </>
                 }
               </div>

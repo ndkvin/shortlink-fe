@@ -3,6 +3,7 @@ import Hero from '@components/home/hero'
 import Content from "@components/home/content"
 import Faq from '@components/home/faq'
 import Contact from '@components/home/contact'
+import Cookies from '@components/home/cookies'
 import { Context } from 'vm'
 import nookies from 'nookies'
 
@@ -10,16 +11,17 @@ interface IProps {
   login: boolean
 }
 
-export default function home({ login } : IProps) : JSX.Element {
+export default function home({ login }: IProps): JSX.Element {
   return (
-      <Home login={login}>
-        <>
-          <Hero login={login}/>
-          <Content />
-          <Faq />
-          <Contact />
-        </>
-      </Home>
+    <Home login={login}>
+      <>
+        <Hero login={login} />
+        <Content />
+        <Faq />
+        <Contact />
+        <Cookies />
+      </>
+    </Home>
   )
 }
 
@@ -29,14 +31,14 @@ export async function getServerSideProps(ctx: Context) {
 
   if (cookies.token_) {
     return {
-      props : {
+      props: {
         login: true,
       }
     }
   }
 
   return {
-    props : {
+    props: {
       login: false,
     }
   }

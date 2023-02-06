@@ -27,7 +27,7 @@ export default function Form() {
     setError('')
     const res = await form('POST', '/user/login', JSON.stringify(field))
     if(res.code == 200) {
-      cookies.set('token_', res.access_token)
+      cookies.set('token_', res.access_token, { expires: 3 })
       setField({})
       Router.replace('/')
     } else {

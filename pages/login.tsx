@@ -35,6 +35,6 @@ export async function getServerSideProps(ctx: Context) {
   return { 
     props: {
 
-    } 
+    }
   }
 }

@@ -5,7 +5,7 @@ import Content from "@components/home/content"
 import Faq from '@components/home/faq'
 import Contact from '@components/home/contact'
 
-export default function home() {
+export default function home() : JSX.Element {
   return (
       <Home>
         <>

@@ -1,12 +1,11 @@
-import Navbar from "@components/common/navbar"
-import Footer from "@components/common/footer"
-import Head from "next/head"
+import Head from "next/head";
+import Aside from "@components/dashboard/aside";
 
 interface IProps {
   children: JSX.Element
 }
 
-export default function Home({ children }: IProps) : JSX.Element {
+export default function Dashboard( { children } : IProps ) : JSX.Element{
   return (
     <>
       <Head>
@@ -16,9 +15,9 @@ export default function Home({ children }: IProps) : JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Navbar />
-        { children }
-        <Footer />
+        <Aside>
+            { children }
+        </Aside>
       </main>
     </>
   )

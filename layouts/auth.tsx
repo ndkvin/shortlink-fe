@@ -1,17 +1,15 @@
 import Home from "@layouts/home";
-import Image from "next/image";
-import style from '@styles/auth.module.css'
 
-type Props = {
+interface IProps {
   children: JSX.Element
   title: string
 }
 
-export default function Auth({ children, title }: Props) {
+export default function Auth({ children, title }: IProps) : JSX.Element {
   return (
     <Home>
       <section className="bg-white dark:bg-gray-900">
-        <div className="flex w-1/2 mx-auto">
+        <div className="w-1/2 mx-auto">
           <div className="container flex flex-col items-center justify-center min-h-screen px-6 mx-auto">
 
             <h1 className="mt-4 font-semibold tracking-wide text-center text-gray-800 capitalize md:text-3xl dark:text-white">

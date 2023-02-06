@@ -1,7 +1,7 @@
 import Home from "@layouts/home";
 import Link from "next/link";
 
-export default function NotFound() {
+export default function NotFound() : JSX.Element {
   return (
     <Home>
       <section className="bg-white dark:bg-gray-900 ">

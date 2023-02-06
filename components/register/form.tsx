@@ -1,21 +1,36 @@
 import Link from 'next/link'
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 
-export default function Form() {
+function submit() : void {
+  
+}
+
+export default function Form() : JSX.Element {
   const [visible, setVisible] = useState(false)
+  const [field, setField] = useState({})
+
+  async function changeField(e : any) {
+    const name = e.target.name
+    const value = e.target.value
+
+    setField({
+      ...field,
+      [name]: value
+    })
+  }
 
   return (
     <>
       <form>
         <div>
           <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Name</label>
-          <input type="text" name="name" id="email" placeholder="Jhon Chena" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+          <input type="text" name="name" onChange={changeField} id="name" placeholder="Jhon Chena" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" required/>
         </div>
 
         <div className="mt-6">
           <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email Address</label>
-          <input type="email" name="email" id="email" placeholder="example@example.com" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+          <input type="email" name="email" onChange={changeField} id="email" placeholder="example@example.com" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" required/>
         </div>
 
         <div className="mt-6">
@@ -32,7 +47,7 @@ export default function Form() {
               
             </button>
 
-            <input type={visible ? 'text' : 'password'} placeholder="Super Secret Password" className="block w-full py-2.5 text-gray-700 placeholder-gray-400/70 bg-white border border-gray-200 rounded-lg pl-5 pr-11 rtl:pr-5 rtl:pl-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
+            <input type={visible ? 'text' : 'password'} name="password" onChange={changeField} placeholder="Super Secret Password" className="block w-full py-2.5 text-gray-700 placeholder-gray-400/70 bg-white border border-gray-200 rounded-lg pl-5 pr-11 rtl:pr-5 rtl:pl-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" required/>
           </div>
         </div>
 

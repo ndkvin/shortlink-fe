@@ -1,7 +1,7 @@
 import Form from '@components/login/form'
 import Auth from '@layouts/auth'
 import { Context } from 'vm'
-import  config from '@helpers/config'
+import config from '@helpers/config'
 import nookies from 'nookies'
 
 export default function Login() : JSX.Element {

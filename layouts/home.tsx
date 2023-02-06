@@ -4,9 +4,10 @@ import Head from "next/head"
 
 interface IProps {
   children: JSX.Element
+  login: boolean
 }
 
-export default function Home({ children }: IProps) : JSX.Element {
+export default function Home({ children, login }: IProps) : JSX.Element {
   return (
     <>
       <Head>
@@ -16,7 +17,7 @@ export default function Home({ children }: IProps) : JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Navbar />
+        <Navbar login={login} />
         { children }
         <Footer />
       </main>

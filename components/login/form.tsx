@@ -1,6 +1,6 @@
 import form from '@helpers/form';
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import cookies from 'js-cookie'
 import Router from 'next/router';
@@ -12,7 +12,7 @@ export default function Form() {
   const [error, setError] = useState('')
   const [field, setField] = useState({})
 
-  function changeField(e : any) {
+  function changeField(e : ChangeEvent<HTMLInputElement>) {
     const name = e.target.name
     const value = e.target.value
 
@@ -22,7 +22,7 @@ export default function Form() {
     })
   }
 
-  async function doLogin(e : any)  {
+  async function doLogin(e : ChangeEvent<HTMLFormElement>)  {
     e.preventDefault()
     setError('')
     const res = await form('POST', '/user/login', JSON.stringify(field))

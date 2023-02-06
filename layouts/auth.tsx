@@ -7,7 +7,7 @@ interface IProps {
 
 export default function Auth({ children, title }: IProps) : JSX.Element {
   return (
-    <Home>
+    <Home login={false}>
       <section className="bg-white dark:bg-gray-900">
         <div className="w-1/2 mx-auto">
           <div className="container flex flex-col items-center justify-center min-h-screen px-6 mx-auto">

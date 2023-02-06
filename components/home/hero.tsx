@@ -1,10 +1,11 @@
 import style from '@styles/components/home/hero.module.css'
 import Link from 'next/link'
-import { useState } from 'react'
 
-export default function Hero() {
-  const [login, setLogin] = useState(false)
+interface IProps {
+  login: boolean
+}
 
+export default function Hero({ login } : IProps) {
   return (
     <div className={style.hero + " w-full bg-center bg-cover h-[38rem]"}>
       <div className="flex items-center justify-center w-full h-full bg-gray-900/40">

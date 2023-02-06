@@ -3,7 +3,7 @@ import Link from "next/link"
 import { RxHamburgerMenu } from "react-icons/rx"
 import { CgClose, CgProfile } from "react-icons/cg"
 import jwt_decode from "jwt-decode"
-import cookie from 'js-cookie'
+import cookies from 'js-cookie'
 
 interface IProps {
   login: boolean
@@ -21,13 +21,13 @@ export default function Navbar({ login }: IProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
   useEffect(() => {
-    setToken(cookie.get('token_') ? cookie.get('token_')! : '')
+    setToken(cookies.get('token_') ? cookies.get('token_')! : '')
     const { name }: IJwt = token ? jwt_decode(token) : { name: '' }
     setName(name)
   }, [token])
 
-  function logout() {
-    cookie.remove('token_')
+  function logout() : void {
+    cookies.remove('token_')
     setToken('')
     setIsLogin(false)
   }

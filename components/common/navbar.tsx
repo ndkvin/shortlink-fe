@@ -14,6 +14,7 @@ interface IJwt {
 }
 
 export default function Navbar({ login }: IProps) {
+  const [isLogin, setIsLogin] = useState(login) 
   const [open, setOpen] = useState(false)
   const [token, setToken] = useState('')
   const [name, setName] = useState('')
@@ -25,9 +26,15 @@ export default function Navbar({ login }: IProps) {
     setName(name)
   }, [token])
 
+  function logout() {
+    cookie.remove('token_')
+    setToken('')
+    setIsLogin(false)
+  }
+
   return (
     <>
-      <nav x-data="{ isOpen: false }" className="z-10 sticky top-0 bg-white shadow dark:bg-gray-800">
+      <nav className="z-10 sticky top-0 bg-white shadow dark:bg-gray-800">
         <div className="container px-6 py-4 mx-auto">
           <div className="lg:flex lg:items-center lg:justify-between">
             <div className="flex items-center justify-between">
@@ -48,20 +55,20 @@ export default function Navbar({ login }: IProps) {
               </div>
             </div>
 
-            <div className={open ? 'absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center' : 'absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center hidden'}>
+            <div className={open ? 'absolute inset-x-0 z-20 w-full py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center' : 'absolute inset-x-0 z-20 w-full py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center hidden'}>
               <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
                 <Link href="/#content" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Feature</Link>
                 <Link href="/#faq" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Faq</Link>
-                <Link href="/#contact" className="px-3 py-1 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">About Me</Link>
+                <Link href="/#contact" className="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">About Me</Link>
               </div>
 
               <div className="flex items-center mt-4 lg:mt-0">
                 {
-                  login ?
+                  isLogin ?
                     <>
                       <div className="relative flex">
                         <button onClick={(e) => setDropdownOpen(!dropdownOpen)} type="button" className="flex items-center px-3 py-2 rounded-md focus:outline-none hover:bg-gray-100 dark:hover:bg-gray-700" aria-label="toggle profile dropdown">
-                          <CgProfile size={28} className="text-gray-400" />
+                          <CgProfile size={24} className="text-gray-400" />
 
                           <h3 className="mx-2 text-gray-700 dark:text-gray-200">Hi, {name}</h3>
                         </button>
@@ -89,18 +96,18 @@ export default function Navbar({ login }: IProps) {
                             </span>
                           </a>
                           <hr className="border-gray-200 dark:border-gray-700 " />
-                          <a href="#" className="flex items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                          <button onClick={logout} type="button" className="flex items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                             <svg className="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M19 21H10C8.89543 21 8 20.1046 8 19V15H10V19H19V5H10V9H8V5C8 3.89543 8.89543 3 10 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21ZM12 16V13H3V11H12V8L17 12L12 16Z" fill="currentColor"></path>
                             </svg>
                             <span className="mx-1">
                               Sign Out
                             </span>
-                          </a>
+                          </button>
                         </div>
                       </div>
                     </>
-                    :
+                  :
                     <Link href="/login" className="p-2 -ml-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Login</Link>
                 }
               </div>

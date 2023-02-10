@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {  useState } from "react";
+import { useState } from "react";
 import { AiOutlineLeft } from 'react-icons/ai'
 import Navbar from "@components/dashboard/navbar"
 
@@ -12,7 +12,7 @@ export default function Auuu() {
 
         <div className="flex">
           <Link href="/">
-            <img className="w-auto h-6 sm:h-7" src="https://merakiui.com/images/logo.svg" alt="" />
+            <div className="font-bold text-xl px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md md:mt-0 dark:text-gray-200">Shortlink</div>
           </Link>
           <button className="ml-auto" onClick={e => setOpen(!open)}>
             <AiOutlineLeft className="text-gray-700 dark:text-gray-300" size={30} />

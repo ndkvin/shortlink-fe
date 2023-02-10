@@ -4,6 +4,7 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import form from '@helpers/form';
 import Router from 'next/router';
 import Error from '@components/common/error';
+import cookies from 'js-cookie'
 
 export default function Form(): JSX.Element {
   const [visible, setVisible] = useState(false)
@@ -19,6 +20,16 @@ export default function Form(): JSX.Element {
       [name]: value
     })
   }
+  async function login() : Promise<void> {
+    const res = await form('POST', '/user/login', JSON.stringify(field))
+    if (res.code == 200) {
+      cookies.set('token_', res.access_token, { expires: 3 })
+      setField({})
+      Router.replace('/')
+    } else {
+      setError(res.message)
+    }
+  }
 
   async function register(e: ChangeEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault()
@@ -26,7 +37,7 @@ export default function Form(): JSX.Element {
     const res = await form('POST', '/user', JSON.stringify(field))
     if (res.code == 201) {
       setField({})
-      Router.replace('/')
+      await login()
     } else {
       setError(res.message)
     }

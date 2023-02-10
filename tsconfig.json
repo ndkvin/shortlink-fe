@@ -20,9 +20,6 @@
       "@layouts/*": ["./layouts/*"],
       "@styles/*": ["./styles/*"],
       "@helpers/*": ["./helpers/*"],
-      "@hooks/*": ["./hooks/*"],
-      "@interfaces/*": ["./interfaces/*"],
-      "@colors/*": ["./colors/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

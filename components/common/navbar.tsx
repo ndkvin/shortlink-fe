@@ -4,6 +4,7 @@ import { RxHamburgerMenu } from "react-icons/rx"
 import { CgClose, CgProfile } from "react-icons/cg"
 import jwt_decode from "jwt-decode"
 import cookies from 'js-cookie'
+import { RxDashboard } from "react-icons/rx";
 
 interface IProps {
   login: boolean
@@ -14,7 +15,7 @@ interface IJwt {
 }
 
 export default function Navbar({ login }: IProps) {
-  const [isLogin, setIsLogin] = useState(login) 
+  const [isLogin, setIsLogin] = useState(login)
   const [open, setOpen] = useState(false)
   const [token, setToken] = useState('')
   const [name, setName] = useState('')
@@ -26,7 +27,7 @@ export default function Navbar({ login }: IProps) {
     setName(name)
   }, [token])
 
-  function logout() : void {
+  function logout(): void {
     cookies.remove('token_')
     setToken('')
     setIsLogin(false)
@@ -75,6 +76,13 @@ export default function Navbar({ login }: IProps) {
                         <div
                           className={dropdownOpen ? "absolute z-20 w-48 py-2 mt-11 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800" : "absolute  z-20 w-48 py-2 mt-11 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800 hidden"}
                         >
+                          <a href="/dashboard" className="flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <RxDashboard size={18} className="w-5 h-5 mx-1"/>
+                            <span className="mx-1">
+                              Dashboard
+                            </span>
+                          </a>
+
                           <a href="#" className="flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                             <svg className="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M7 8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8C17 10.7614 14.7614 13 12 13C9.23858 13 7 10.7614 7 8ZM12 11C13.6569 11 15 9.65685 15 8C15 6.34315 13.6569 5 12 5C10.3431 5 9 6.34315 9 8C9 9.65685 10.3431 11 12 11Z" fill="currentColor"></path>
@@ -107,7 +115,7 @@ export default function Navbar({ login }: IProps) {
                         </div>
                       </div>
                     </>
-                  :
+                    :
                     <Link href="/login" className="p-2 -ml-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Login</Link>
                 }
               </div>

@@ -1,7 +1,30 @@
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { CgProfile } from "react-icons/cg"
+import cookies from "js-cookie";
+import jwt_decode from 'jwt-decode'
+import Router from "next/router";
+
+interface IJwt {
+  name: string
+}
 
 export default function Navbar(): JSX.Element {
+  const [token, setToken] = useState('')
+  const [name, setName] = useState('')
+
+  useEffect(() => {
+    setToken(cookies.get('token_') ? cookies.get('token_')! : '')
+    const { name }: IJwt = token ? jwt_decode(token) : { name: '' }
+    setName(name)
+  }, [token])
+
+  function logout(): void {
+    Router.replace('/')
+    cookies.remove('token_')
+    setToken('')
+  }
+
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
@@ -25,27 +48,21 @@ export default function Navbar(): JSX.Element {
                   <CgProfile size={24} className="text-gray-400"/>
                 </button>
               </div>
-              <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
+              <div className="z-50 hidden mr-2 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
                 <div className="px-4 py-3" role="none">
                   <p className="text-sm text-gray-900 dark:text-white" role="none">
-                    Neil Sims
-                  </p>
-                  <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                    neil.sims@flowbite.com
+                    { name }
                   </p>
                 </div>
                 <ul className="py-1" role="none">
                   <li>
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>
+                    <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</Link>
                   </li>
                   <li>
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
+                    <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</Link>
                   </li>
                   <li>
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>
-                  </li>
-                  <li>
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
+                    <button type="button" onClick={logout} className="block pl-4 pr-8 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</button>
                   </li>
                 </ul>
               </div>

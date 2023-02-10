@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function NotFound() : JSX.Element {
   return (
-    <Home>
+    <Home login={false}>
       <section className="bg-white dark:bg-gray-900 ">
         <div className="container flex items-center min-h-screen px-6 py-12 mx-auto">
           <div className="flex flex-col items-center max-w-sm mx-auto text-center">

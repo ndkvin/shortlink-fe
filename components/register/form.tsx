@@ -65,7 +65,7 @@ export default function Form(): JSX.Element {
 
             <input type={visible ? 'text' : 'password'} minLength={8} name="password" pattern="(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" onChange={changeField} placeholder="Super Secret Password" className="block w-full py-2.5 text-gray-700 placeholder-gray-400/70 bg-white border border-gray-200 rounded-lg pl-5 pr-11 rtl:pr-5 rtl:pl-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" required />
           </div>
-          <p className="mt-3 text-xs text-gray-400 dark:text-gray-600">The password must contain uppercase, lowercase, numbers and special characters, with 8 characters length</p>
+          <p className="mt-3 text-xs text-gray-400 dark:text-gray-600">The password must contain uppercase, lowercase, numbers and special character, with 8 characters length</p>
         </div>
 
         <div className="mt-6">

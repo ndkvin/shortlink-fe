@@ -49,7 +49,7 @@ export default function Navbar({ login }: IProps) {
                   {
                     open ?
                       <CgClose size={24} />
-                      :
+                    :
                       <RxHamburgerMenu size={24} />
                   }
                 </button>
@@ -76,12 +76,12 @@ export default function Navbar({ login }: IProps) {
                         <div
                           className={dropdownOpen ? "absolute z-20 w-48 py-2 mt-11 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800" : "absolute  z-20 w-48 py-2 mt-11 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800 hidden"}
                         >
-                          <a href="/dashboard" className="flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                          <Link href="/test" className="flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                             <RxDashboard size={18} className="w-5 h-5 mx-1"/>
                             <span className="mx-1">
                               Dashboard
                             </span>
-                          </a>
+                          </Link>
 
                           <a href="#" className="flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                             <svg className="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -115,7 +115,7 @@ export default function Navbar({ login }: IProps) {
                         </div>
                       </div>
                     </>
-                    :
+                  :
                     <Link href="/login" className="p-2 -ml-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Login</Link>
                 }
               </div>

@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Router from "next/router"
 import Link from "next/link"
-import jwt_decode from "jwt-decode"
 import cookies from "js-cookie"
 import { RxHamburgerMenu } from "react-icons/rx"
 import { CgClose, CgProfile } from "react-icons/cg"
@@ -10,27 +9,17 @@ import { RxDashboard } from "react-icons/rx"
 interface IProps {
   sideOpen: boolean
   setSideOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-interface IJwt {
+  setToken: React.Dispatch<React.SetStateAction<string>>
   name: string
 }
 
-export default function Navbar({ sideOpen, setSideOpen }: IProps) {
-  const [token, setToken] = useState('')
-  const [name, setName] = useState('')
+export default function Navbar({ sideOpen, setSideOpen, setToken, name }: IProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
-  useEffect(() => {
-    setToken(cookies.get('token_') ? cookies.get('token_')! : '')
-    const { name }: IJwt = token ? jwt_decode(token) : { name: '' }
-    setName(name)
-  }, [token])
-
   function logout(): void {
-    Router.push('/')
     cookies.remove('token_')
     setToken('')
+    Router.push('/')
   }
 
   return (

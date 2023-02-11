@@ -76,8 +76,8 @@ export default function Navbar({ login }: IProps) {
                         <div
                           className={dropdownOpen ? "absolute z-20 w-48 py-2 mt-11 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800" : "absolute  z-20 w-48 py-2 mt-11 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800 hidden"}
                         >
-                          <Link href="/test" className="flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                            <RxDashboard size={18} className="w-5 h-5 mx-1"/>
+                          <Link href="/dashboard" className="flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                            <RxDashboard size={18} className="w-5 h-5 mx-1" />
                             <span className="mx-1">
                               Dashboard
                             </span>

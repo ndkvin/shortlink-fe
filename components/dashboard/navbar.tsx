@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react"
+import Router from "next/router"
 import Link from "next/link"
+import jwt_decode from "jwt-decode"
+import cookies from "js-cookie"
 import { RxHamburgerMenu } from "react-icons/rx"
 import { CgClose, CgProfile } from "react-icons/cg"
-import jwt_decode from "jwt-decode"
-import cookies from 'js-cookie'
-import { AiOutlineRight } from 'react-icons/ai'
-import { RxDashboard } from "react-icons/rx";
+import { RxDashboard } from "react-icons/rx"
 
 interface IProps {
-  login: boolean
   sideOpen: boolean
   setSideOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -17,9 +16,7 @@ interface IJwt {
   name: string
 }
 
-export default function Navbar({ login, sideOpen, setSideOpen }: IProps) {
-  const [isLogin, setIsLogin] = useState(login)
-  const [open, setOpen] = useState(false)
+export default function Navbar({ sideOpen, setSideOpen }: IProps) {
   const [token, setToken] = useState('')
   const [name, setName] = useState('')
   const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -31,9 +28,9 @@ export default function Navbar({ login, sideOpen, setSideOpen }: IProps) {
   }, [token])
 
   function logout(): void {
+    Router.push('/')
     cookies.remove('token_')
     setToken('')
-    setIsLogin(false)
   }
 
   return (
@@ -42,20 +39,17 @@ export default function Navbar({ login, sideOpen, setSideOpen }: IProps) {
         <div className="container px-6 py-4 mx-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-between">
-              {
-                sideOpen ?
-                  <Link
-                    href="/"
-                  >
-                    <div className="font-bold text-xl px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md md:mt-0 dark:text-gray-200">Shortlink</div>
-                  </Link>
+
+              <button onClick={e => setSideOpen(!sideOpen)} type="button" className='translate-x-0 opacity-100 text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400 mr-4' aria-label="toggle menu">
+                {
+                  sideOpen ?
+                    <CgClose size={24} className="font-bold"/>
                   :
-                  <div className="flex">
-                    <button onClick={e => setSideOpen(!sideOpen)} type="button" className='translate-x-0 opacity-100 text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400 mr-4' aria-label="toggle menu">
-                      <AiOutlineRight size={24} />
-                    </button>
-                  </div>
-              }
+                    <RxHamburgerMenu size={24} className="font-bold"/>
+                    
+                }
+              </button>
+
             </div>
             <div className="flex items-center mt-4 md:mt-0">
               <div className="relative flex">

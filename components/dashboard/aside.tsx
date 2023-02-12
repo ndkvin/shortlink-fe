@@ -19,35 +19,35 @@ export default function Aside({ name } : IProps): JSX.Element {
 
       <div className="flex flex-col justify-between flex-1 mt-6">
         <nav>
-          <a className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md dark:bg-gray-800 dark:text-gray-200" href="#">
+          <Link className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md dark:bg-gray-800 dark:text-gray-200" href="#">
             <RxDashboard size={22}/>
 
             <span className="mx-4 font-medium">Dashboard</span>
-          </a>
+          </Link>
 
-          <a className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+          <Link className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
             <TbBrandGoogleAnalytics size={22}/>
 
             <span className="mx-4 font-medium">Analytics</span>
-          </a>
+          </Link>
 
-          <a className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+          <Link className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
             <IoLinkSharp size={22}/>
 
             <span className="mx-4 font-medium">Links</span>
-          </a>
+          </Link>
 
-          <a className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+          <Link className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
             <FiSettings size={22}/>
 
             <span className="mx-4 font-medium">Settings</span>
-          </a>
+          </Link>
         </nav>
 
-        <a href="#" className="flex items-center px-4 -mx-2">
+        <Link href="#" className="flex items-center px-4 -mx-2">
           <CgProfile size={30} className="text-gray-400"/>
           <span className="mx-2 font-medium text-gray-800 dark:text-gray-200">{ name }</span>
-        </a>
+        </Link>
       </div>
     </aside>
   )

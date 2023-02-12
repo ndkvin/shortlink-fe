@@ -11,7 +11,7 @@ export default function CreateLinkModal(): JSX.Element {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
 
-  async function createLink(e: ChangeEvent<HTMLFormElement>): Promise<void> {
+  async function createLink(e: ChangeEvent<HTMLFormElement>) : Promise<void> {
     e.preventDefault()
     setError('')
     setSuccess('')

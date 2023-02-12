@@ -38,7 +38,7 @@ export default function Dashboard({ children }: IProps) {
           {
             open ?
               <Aside name={name} />
-            :
+              :
               <AsideCollapse />
           }
 

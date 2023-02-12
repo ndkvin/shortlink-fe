@@ -30,7 +30,6 @@ export default function AsideCollapse (): JSX.Element {
       </nav>
 
       <div className="flex flex-col space-y-6">      
-
         <a href="#">
           <CgProfile size={30} className="text-gray-400 mx-auto"/>
         </a>

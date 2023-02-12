@@ -4,6 +4,7 @@ import cookies from "js-cookie"
 import Aside from "@components/dashboard/aside"
 import Navbar from "@components/dashboard/navbar"
 import Head from "next/head"
+import AsideCollapse from "@components/dashboard/asideCollapse"
 
 interface IProps {
   children: JSX.Element
@@ -34,12 +35,17 @@ export default function Dashboard({ children }: IProps) {
       </Head>
       <main>
         <div className="flex">
-          <Aside open={open} name={name}/>
+          {
+            open ?
+              <Aside name={name} />
+            :
+              <AsideCollapse />
+          }
 
-          <div className={open ? "ml-64 text-gray-700 bg-white dark:bg-gray-900 dark:border-gray-600 dark:text-gray-200" : "ml-0 text-gray-700 bg-white dark:bg-gray-900 dark:border-gray-600 dark:text-gray-200"}>
-            <Navbar sideOpen={open} setSideOpen={setOpen} setToken={setToken} name={name}/>
+          <div className={open ? "text-gray-700 bg-white dark:bg-gray-900 dark:border-gray-600 dark:text-gray-200 ml-64" : " text-gray-700 bg-white dark:bg-gray-900 dark:border-gray-600 dark:text-gray-200 ml-16"}>
+            <Navbar sideOpen={open} setSideOpen={setOpen} setToken={setToken} name={name} />
             <div className="p-4 min-h-screen">
-              { children }
+              {children}
             </div>
           </div>
         </div>

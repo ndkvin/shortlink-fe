@@ -2,12 +2,13 @@ import nookies from 'nookies'
 import config from "@helpers/config"
 import Dashboard from "@layouts/dashboard"
 import { Context } from "vm"
-import getAuth from "@helpers/getAuth"
+import getAuthServer from "@helpers/getAuthServer"
 import LinkCard from '@components/dashboard/link/linkCard'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import getAuth from '@helpers/getAuth'
 
 interface IProps {
-  links: any
+  data: any
 }
 
 interface ILink {
@@ -19,13 +20,23 @@ interface ILink {
   slug: string
 }
 
-export default function Link({ links }: IProps): JSX.Element {
-  useEffect(() => console.log(links))
+export default function Link({ data }: IProps): JSX.Element {
+  const [links, setLinks] = useState([])
+  const [edit, setEdit] = useState(false)
+
+  useEffect(() => {
+    async function fetchData() {
+      const links = await getAuth("/link")
+      setLinks(links.data)
+    }
+
+    fetchData()
+  }, [edit])
 
   return (
     <Dashboard>
       <>
-        { links.data.map( (link : ILink, index : number) => <LinkCard key={index} data={link}/>) }
+        { links.map( (link : ILink, index : number) => <LinkCard key={index} data={link} edit={edit} setEdit={setEdit}/>) }
       </>
     </Dashboard>
   )
@@ -41,11 +52,11 @@ export async function getServerSideProps(ctx: Context) {
 
   ctx.res.setHeader("set-cookie", cookie);
 
-  const links = await getAuth("/link", cookies.token_)
+  const data = await getAuthServer("/link", cookies.token_)
 
   return {
     props: {
-      links
+      data
     }
   }
 }

@@ -1,5 +1,5 @@
 import config from "@helpers/config"
-import { useEffect, useState } from "react"
+import { SetStateAction, useEffect, useState } from "react"
 import { AiFillEdit } from "react-icons/ai"
 import EditLinkModal from "@components/dashboard/link/editLinkModal"
 import Link from "next/link"
@@ -17,10 +17,12 @@ interface ILink {
 interface IProps {
   key: number
   data: ILink
+  edit: boolean
+  setEdit: React.Dispatch<SetStateAction<boolean>>
 }
 
 
-export default function LinkCard({ key, data }: IProps): JSX.Element {
+export default function LinkCard({ key, data, edit, setEdit }: IProps): JSX.Element {
   const [openEditLink, setOpenEditLink] = useState(false)
   const [date, setDate] = useState("")
 
@@ -64,6 +66,8 @@ export default function LinkCard({ key, data }: IProps): JSX.Element {
           link: data.link,
           slug: data.slug
         }}
+        edit={edit}
+        setEdit={setEdit}
       />
     </>
   )

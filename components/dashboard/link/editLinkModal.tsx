@@ -15,10 +15,12 @@ interface IProps {
   open: boolean
   setOpen: React.Dispatch<SetStateAction<boolean>>
   data: ILink
+  edit: boolean
+  setEdit: React.Dispatch<SetStateAction<boolean>>
 }
 
 
-export default function EditLinkModal({ open, setOpen, data }: IProps): JSX.Element {
+export default function EditLinkModal({ open, setOpen, data, edit, setEdit }: IProps): JSX.Element {
   const [link, setLink] = useState(data.link)
   const [slug, setSlug] = useState(data.slug)
   const [success, setSuccess] = useState("")
@@ -35,12 +37,11 @@ export default function EditLinkModal({ open, setOpen, data }: IProps): JSX.Elem
     }))
 
     if(res.code != 200) {
-      setError(res.message)      
+      setError(res.message)
     } else {
       setSuccess(res.message)
+      setEdit(!edit)    
     }
-
-    console.log(res)
   }
 
   return (

@@ -3,29 +3,29 @@ import config from "@helpers/config"
 import Dashboard from "@layouts/dashboard"
 import { Context } from "vm"
 import getAuth from "@helpers/getAuth"
-import { useEffect, useState } from "react"
+import LinkCard from '@components/dashboard/link/linkCard'
+import { useEffect } from 'react'
 
 interface IProps {
   links: any
 }
 
 interface ILink {
+  created_at: string
   id: string
-  
+  is_lock: boolean
+  link: string
+  password: boolean
+  slug: string
 }
 
-export default function Link({ links } : IProps) : JSX.Element {
-  
-  // async function get() : Promise<any> {
-  //   const linksData = await getAuth("/link")
-  //   console.log(linksData)
-  // }
-  useEffect(() => console.log(links), [])
-  return(
+export default function Link({ links }: IProps): JSX.Element {
+  useEffect(() => console.log(links))
+
+  return (
     <Dashboard>
       <>
-        hallo
-        { links.data.map( (link : ILink) => link.id + "                    +++++             ") }
+        { links.data.map( (link : ILink, index : number) => <LinkCard key={index} data={link}/>) }
       </>
     </Dashboard>
   )
@@ -43,7 +43,7 @@ export async function getServerSideProps(ctx: Context) {
 
   const links = await getAuth("/link", cookies.token_)
 
-  return { 
+  return {
     props: {
       links
     }

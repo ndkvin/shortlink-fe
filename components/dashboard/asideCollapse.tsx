@@ -13,7 +13,7 @@ export default function AsideCollapse (): JSX.Element {
           <img className="w-auto h-6 " src="https://merakiui.com/images/logo.svg" alt="" />
         </Link>
 
-        <Link href="#" className="p-1.5 text-gray-700 focus:outline-nones transition-colors duration-200 rounded-lg dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100">
+        <Link href="/dashboard" className="p-1.5 text-gray-700 focus:outline-nones transition-colors duration-200 rounded-lg dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100">
           <RxDashboard size={22}/>
         </Link>
 

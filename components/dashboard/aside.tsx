@@ -19,7 +19,7 @@ export default function Aside({ name } : IProps): JSX.Element {
 
       <div className="flex flex-col justify-between flex-1 mt-6">
         <nav>
-          <Link className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md dark:bg-gray-800 dark:text-gray-200" href="#">
+          <Link className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md dark:bg-gray-800 dark:text-gray-200" href="/dashboard">
             <RxDashboard size={22}/>
 
             <span className="mx-4 font-medium">Dashboard</span>

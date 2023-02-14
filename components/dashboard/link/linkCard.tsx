@@ -1,8 +1,9 @@
 import config from "@helpers/config"
 import { SetStateAction, useEffect, useState } from "react"
-import { AiFillEdit } from "react-icons/ai"
+import { AiFillEdit, AiOutlineQrcode } from "react-icons/ai"
 import EditLinkModal from "@components/dashboard/link/editLinkModal"
 import Link from "next/link"
+import QrModal from "./qrModal"
 
 interface ILink {
   created_at: string
@@ -25,6 +26,7 @@ interface IProps {
 export default function LinkCard({ key, data, edit, setEdit }: IProps): JSX.Element {
   const [openEditLink, setOpenEditLink] = useState(false)
   const [date, setDate] = useState("")
+  const [openQr, setOpenQr] = useState(false)
 
   useEffect(() => {
     const date = new Date(data.created_at)
@@ -35,17 +37,23 @@ export default function LinkCard({ key, data, edit, setEdit }: IProps): JSX.Elem
     <>
       <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-5">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-light text-gray-600 dark:text-gray-400">{ date }</span>
-          <button onClick={e => setOpenEditLink(true)} className="flex px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500" tabIndex={0} role="button">
-            <AiFillEdit size={20} className="mr-1" />
-            Edit
-          </button>
+          <span className="text-sm font-light text-gray-600 dark:text-gray-400">{date}</span>
+          <div className="flex">
+            <button onClick={e => setOpenEditLink(true)} className="mr-2 flex px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500" tabIndex={0} role="button">
+              <AiFillEdit size={20} className="mr-1" />
+              Edit
+            </button>
+            <button onClick={e => setOpenQr(true)} className="flex px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500" tabIndex={0} role="button">
+              <AiOutlineQrcode size={20} className="mr-1" />
+              Qr
+            </button>
+          </div>
         </div>
 
         <div className="mt-2">
-          <Link target="_blank" href={ `${config.BASE_URL}/${data.slug}` } className="text-xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline" tabIndex={0} role="link">{ `${config.BASE_URL}/${data.slug}` }</Link>
+          <Link target="_blank" href={`${config.BASE_URL}/${data.slug}`} className="text-xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline" tabIndex={0} role="link">{`${config.BASE_URL}/${data.slug}`}</Link>
           <div className="mt-2 text-gray-600 dark:text-gray-300">
-            { data.link }
+            {data.link}
           </div>
         </div>
 
@@ -58,9 +66,10 @@ export default function LinkCard({ key, data, edit, setEdit }: IProps): JSX.Elem
           </div>
         </div> */}
       </div>
-      <EditLinkModal 
-        open={openEditLink} 
-        setOpen={setOpenEditLink} 
+    
+      <EditLinkModal
+        open={openEditLink}
+        setOpen={setOpenEditLink}
         data={{
           id: data.id,
           link: data.link,
@@ -68,6 +77,11 @@ export default function LinkCard({ key, data, edit, setEdit }: IProps): JSX.Elem
         }}
         edit={edit}
         setEdit={setEdit}
+      />
+      <QrModal 
+        open={openQr}
+        setOpen={setOpenQr}
+        id={data.id}
       />
     </>
   )

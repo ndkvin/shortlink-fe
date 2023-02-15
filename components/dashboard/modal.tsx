@@ -11,7 +11,7 @@ export default function Modal({ children, open, setOpen }: IProps): JSX.Element 
   return (
 
     <div
-      className={open ? "fixed inset-0 z-10 overflow-y-auto" : "fixed inset-0 z-10 overflow-y-auto hidden"}
+      className={open ? "fixed inset-0 z-30 overflow-y-auto" : "fixed inset-0 z-10 overflow-y-auto hidden"}
       aria-labelledby="modal-title" role="dialog" aria-modal="true"
     >
       <div className="flex items-end justify-center min-h-screen ml-16 sm:ml-0 px-4 pt-4 pb-20 text-center sm:block sm:p-0">

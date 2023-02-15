@@ -18,7 +18,7 @@ interface IProps {
 }
 
 
-export default function EditLinkModal({ open, setOpen, data, edit, setEdit }: IProps): JSX.Element {
+export default function EditModal({ open, setOpen, data, edit, setEdit }: IProps): JSX.Element {
   const [link, setLink] = useState(data.link)
   const [slug, setSlug] = useState(data.slug)
 
@@ -30,11 +30,11 @@ export default function EditLinkModal({ open, setOpen, data, edit, setEdit }: IP
       slug
     }))
 
-    if (res.code != 200) {
-      error(res.message)
-    } else {
+    if (res.code == 200) {
       setEdit(!edit)
       success(res.message)
+    } else {
+      error(res.message)
     }
   }
 
@@ -55,7 +55,7 @@ export default function EditLinkModal({ open, setOpen, data, edit, setEdit }: IP
           </label>
 
           <label className="block mt-3" >
-            <input onChange={e => setLink(e.target.value)} value={link} type="text" name="link" id="link" className="block w-full px-4 py-3 text-sm text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" required />
+            <input onChange={e => setLink(e.target.value)} value={link} type="text" name="link" className="block w-full px-4 py-3 text-sm text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" required />
           </label>
 
           <label className="block text-sm text-gray-700 dark:text-gray-200 mt-3">
@@ -63,7 +63,7 @@ export default function EditLinkModal({ open, setOpen, data, edit, setEdit }: IP
           </label>
 
           <label className="block mt-3" >
-            <input onChange={e => setSlug(e.target.value)} value={slug} minLength={3} type="text" name="slug" id="slug" className="block w-full px-4 py-3 text-sm text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" required />
+            <input onChange={e => setSlug(e.target.value)} value={slug} minLength={3} type="text" name="slug" className="block w-full px-4 py-3 text-sm text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" required />
           </label>
 
           <div className="mt-4 sm:items-center mr-2">

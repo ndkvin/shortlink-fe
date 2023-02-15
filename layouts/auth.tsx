@@ -5,7 +5,7 @@ interface IProps {
   title: string
 }
 
-export default function Auth({ children, title }: IProps) : JSX.Element {
+export default function Auth({ children, title }: IProps): JSX.Element {
   return (
     <Home login={false}>
       <section className="bg-white dark:bg-gray-900">
@@ -13,7 +13,7 @@ export default function Auth({ children, title }: IProps) : JSX.Element {
           <div className="container flex flex-col items-center justify-center min-h-screen px-6 mx-auto">
 
             <h1 className="mt-4 font-semibold tracking-wide text-center text-gray-800 capitalize md:text-3xl dark:text-white">
-              { title }
+              {title}
             </h1>
 
             <div className="w-full max-w-md mx-auto mt-6">

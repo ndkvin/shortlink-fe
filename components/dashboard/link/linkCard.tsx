@@ -2,8 +2,8 @@ import config from "@helpers/config"
 import { SetStateAction, useEffect, useState } from "react"
 import { AiFillEdit, AiOutlineQrcode } from "react-icons/ai"
 import EditLinkModal from "@components/dashboard/link/editLinkModal"
-import Link from "next/link"
 import QrModal from "./qrModal"
+import { success } from "@components/common/toast"
 
 interface ILink {
   created_at: string
@@ -12,6 +12,7 @@ interface ILink {
   link: string
   password: boolean
   slug: string
+  qr: string
 }
 
 
@@ -27,6 +28,11 @@ export default function LinkCard({ key, data, edit, setEdit }: IProps): JSX.Elem
   const [openEditLink, setOpenEditLink] = useState(false)
   const [date, setDate] = useState("")
   const [openQr, setOpenQr] = useState(false)
+
+  const copy = () => {
+    navigator.clipboard.writeText(`${config.BASE_URL}/${data.slug}`)
+    success("Link Copied")
+  }
 
   useEffect(() => {
     const date = new Date(data.created_at)
@@ -51,7 +57,7 @@ export default function LinkCard({ key, data, edit, setEdit }: IProps): JSX.Elem
         </div>
 
         <div className="mt-2">
-          <Link target="_blank" href={`${config.BASE_URL}/${data.slug}`} className="text-xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline" tabIndex={0} role="link">{`${config.BASE_URL}/${data.slug}`}</Link>
+          <button onClick={copy} className="text-xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline" tabIndex={0} role="link">{`${config.BASE_URL}/${data.slug}`}</button>
           <div className="mt-2 text-gray-600 dark:text-gray-300">
             {data.link}
           </div>
@@ -66,7 +72,7 @@ export default function LinkCard({ key, data, edit, setEdit }: IProps): JSX.Elem
           </div>
         </div> */}
       </div>
-    
+
       <EditLinkModal
         open={openEditLink}
         setOpen={setOpenEditLink}
@@ -78,10 +84,10 @@ export default function LinkCard({ key, data, edit, setEdit }: IProps): JSX.Elem
         edit={edit}
         setEdit={setEdit}
       />
-      <QrModal 
+      <QrModal
         open={openQr}
         setOpen={setOpenQr}
-        id={data.id}
+        qr={data.qr}
       />
     </>
   )

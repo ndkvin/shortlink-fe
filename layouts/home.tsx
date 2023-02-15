@@ -1,6 +1,7 @@
 import Navbar from "@components/common/navbar"
 import Footer from "@components/common/footer"
 import Head from "next/head"
+import { ToastContainer } from "react-toastify"
 
 interface IProps {
   children: JSX.Element
@@ -18,6 +19,7 @@ export default function Home({ children, login }: IProps) : JSX.Element {
       </Head>
       <main>
         <Navbar login={login} />
+        <ToastContainer />
         { children }
         <Footer />
       </main>

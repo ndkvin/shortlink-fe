@@ -1,7 +1,5 @@
-import Error from "@components/common/error"
-import Success from "@components/common/success"
+import { error, success } from "@components/common/toast"
 import Modal from "@components/dashboard/modal"
-import config from "@helpers/config"
 import formAuth from "@helpers/formAuth"
 import { ChangeEvent, SetStateAction, useState } from "react"
 
@@ -23,13 +21,9 @@ interface IProps {
 export default function EditLinkModal({ open, setOpen, data, edit, setEdit }: IProps): JSX.Element {
   const [link, setLink] = useState(data.link)
   const [slug, setSlug] = useState(data.slug)
-  const [success, setSuccess] = useState("")
-  const [error, setError] = useState("")
 
   async function editLink(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault()
-    setError("")
-    setSuccess("")
 
     const res = await formAuth("PUT", `/link/${data.id}`, JSON.stringify({
       link,
@@ -37,10 +31,10 @@ export default function EditLinkModal({ open, setOpen, data, edit, setEdit }: IP
     }))
 
     if (res.code != 200) {
-      setError(res.message)
+      error(res.message)
     } else {
-      setSuccess(res.message)
       setEdit(!edit)
+      success(res.message)
     }
   }
 
@@ -50,23 +44,10 @@ export default function EditLinkModal({ open, setOpen, data, edit, setEdit }: IP
       setOpen={setOpen}
     >
       <>
+
         <h3 className="text-lg font-medium leading-6 text-gray-800 capitalize dark:text-white" id="modal-title">
           Edit link
         </h3>
-
-        {
-          success != "" &&
-          <div className="mx-auto mt-4">
-            <Success message={success} />
-          </div>
-        }
-
-        {
-          error != "" &&
-          <div className="mx-auto mt-4">
-            <Error message={error} />
-          </div>
-        }
 
         <form className="mt-4" onSubmit={editLink}>
           <label className="text-sm text-gray-700 dark:text-gray-200">
@@ -87,7 +68,7 @@ export default function EditLinkModal({ open, setOpen, data, edit, setEdit }: IP
 
           <div className="mt-4 sm:items-center mr-2">
             <button type="submit" className="mx-auto min-w-full px-4 py-2 mt-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md sm:mt-0 sm:w-1/2 sm:mx-2 hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40">
-              Send invites
+              Edit
             </button>
           </div>
         </form>

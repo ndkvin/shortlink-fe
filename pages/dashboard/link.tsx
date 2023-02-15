@@ -18,6 +18,7 @@ interface ILink {
   link: string
   password: boolean
   slug: string
+  qr: string
 }
 
 export default function Link({ data }: IProps): JSX.Element {
@@ -36,7 +37,7 @@ export default function Link({ data }: IProps): JSX.Element {
   return (
     <Dashboard>
       <>
-        { links.map( (link : ILink, index : number) => <LinkCard key={index} data={link} edit={edit} setEdit={setEdit}/>) }
+        {links.map((link: ILink, index: number) => <LinkCard key={index} data={link} edit={edit} setEdit={setEdit} />)}
       </>
     </Dashboard>
   )

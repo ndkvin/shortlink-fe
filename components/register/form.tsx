@@ -3,12 +3,11 @@ import React, { ChangeEvent, useState } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import form from '@helpers/form';
 import Router from 'next/router';
-import Error from '@components/common/error';
+import { error } from '@components/common/toast';
 import cookies from 'js-cookie'
 
 export default function Form(): JSX.Element {
   const [visible, setVisible] = useState(false)
-  const [error, setError] = useState('')
   const [field, setField] = useState({})
 
   async function changeField(e: any) {
@@ -27,28 +26,24 @@ export default function Form(): JSX.Element {
       setField({})
       Router.replace('/')
     } else {
-      setError(res.message)
+      error(res.message)
     }
   }
 
   async function register(e: ChangeEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault()
-    setError('')
+
     const res = await form('POST', '/user', JSON.stringify(field))
     if (res.code == 201) {
       setField({})
       await login()
     } else {
-      setError(res.message)
+      error(res.message)
     }
   }
 
   return (
     <>
-      {
-        error != '' &&
-        <Error message={error} />
-      }
       <form onSubmit={register}>
         <div>
           <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Name</label>

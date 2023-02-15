@@ -2,20 +2,15 @@ import Modal from "@components/dashboard/modal";
 import config from "@helpers/config";
 import formAuth from "@helpers/formAuth";
 import { ChangeEvent, useState } from "react";
-import Success from "@components/common/success"
-import Error from "@components/common/error";
+import { error, success } from "@components/common/toast";
 
 export default function CreateLinkModal(): JSX.Element {
   const [link, setLink] = useState("")
   const [slug, setSlug] = useState("")
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
   const [openCreateLink, setOpenCreateLink] = useState(false)
 
   async function createLink(e: ChangeEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault()
-    setError('')
-    setSuccess('')
 
     const res = await formAuth('POST', '/link', JSON.stringify({
       link,
@@ -25,9 +20,9 @@ export default function CreateLinkModal(): JSX.Element {
     if (res.code == 201) {
       setLink("")
       setSlug("")
-      setSuccess(res.message)
+      success(res.message)
     } else {
-      setError(res.message)
+      error(res.message)
     }
   }
 
@@ -44,20 +39,6 @@ export default function CreateLinkModal(): JSX.Element {
           <h3 className="text-lg font-medium leading-6 text-gray-800 capitalize dark:text-white" id="modal-title">
             Create New Short Link
           </h3>
-
-          {
-            success != "" &&
-            <div className="mx-auto mt-4">
-              <Success message={success} />
-            </div>
-          }
-
-          {
-            error != "" &&
-            <div className="mx-auto mt-4">
-              <Error message={error} />
-            </div>
-          }
 
           <form className="mt-4" onSubmit={createLink}>
             <label className="text-sm text-gray-700 dark:text-gray-200">
@@ -78,7 +59,7 @@ export default function CreateLinkModal(): JSX.Element {
 
             <div className="mt-4 sm:items-center mr-2">
               <button type="submit" className="mx-auto min-w-full px-4 py-2 mt-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md sm:mt-0 sm:w-1/2 sm:mx-2 hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40">
-                Send invites
+                Create
               </button>
             </div>
           </form>

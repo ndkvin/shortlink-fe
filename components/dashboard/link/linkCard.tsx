@@ -124,6 +124,7 @@ export default function LinkCard({ data, edit, setEdit }: IProps): JSX.Element {
           setOpen={setOpenPassword}
           id={data.id}
           edit={edit}
+          link={data.link}
           setEdit={setEdit}
           password={data.password}
         />

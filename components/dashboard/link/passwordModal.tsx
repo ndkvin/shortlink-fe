@@ -7,12 +7,13 @@ interface IProps {
   setOpen: React.Dispatch<SetStateAction<boolean>>
   id: string
   edit: boolean
+  link: string
   setEdit: React.Dispatch<SetStateAction<boolean>>
   password: boolean
 }
 
 
-export default function PasswordModal({ open, setOpen, id, edit, setEdit, password }: IProps): JSX.Element {
+export default function PasswordModal({ open, setOpen, id, edit, link, setEdit, password }: IProps): JSX.Element {
 
   return (
     <>
@@ -24,6 +25,7 @@ export default function PasswordModal({ open, setOpen, id, edit, setEdit, passwo
             id={id}
             edit={edit}
             setEdit={setEdit}
+            link={link}
           />
           :
           <SetPassword

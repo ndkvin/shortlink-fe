@@ -2,14 +2,9 @@ import nookies from 'nookies'
 import config from "@helpers/config"
 import Dashboard from "@layouts/dashboard"
 import { Context } from "vm"
-import getAuthServer from "@helpers/getAuthServer"
 import LinkCard from '@components/dashboard/link/linkCard'
 import { useEffect, useState } from 'react'
 import getAuth from '@helpers/getAuth'
-
-interface IProps {
-  data: any
-}
 
 interface ILink {
   created_at: string
@@ -21,7 +16,7 @@ interface ILink {
   qr: string
 }
 
-export default function Link({ data }: IProps): JSX.Element {
+export default function Link(): JSX.Element {
   const [links, setLinks] = useState([])
   const [edit, setEdit] = useState(false)
 
@@ -29,6 +24,7 @@ export default function Link({ data }: IProps): JSX.Element {
     async function fetchData() {
       const links = await getAuth("/link")
       setLinks(links.data)
+      console.log(links.data[0])
     }
 
     fetchData()
@@ -44,8 +40,6 @@ export default function Link({ data }: IProps): JSX.Element {
 }
 
 export async function getServerSideProps(ctx: Context) {
-  const cookies = nookies.get(ctx)
-
   const response = await fetch(config.API_URL)
 
   const cookie = response.headers.get("set-cookie");
@@ -53,11 +47,9 @@ export async function getServerSideProps(ctx: Context) {
 
   ctx.res.setHeader("set-cookie", cookie);
 
-  const data = await getAuthServer("/link", cookies.token_)
-
   return {
     props: {
-      data
+
     }
   }
 }

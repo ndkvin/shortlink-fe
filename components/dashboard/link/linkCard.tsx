@@ -123,6 +123,9 @@ export default function LinkCard({ data, edit, setEdit }: IProps): JSX.Element {
           open={openPassword}
           setOpen={setOpenPassword}
           id={data.id}
+          edit={edit}
+          setEdit={setEdit}
+          password={data.password}
         />
         <DeleteModal 
           open={openDelete}

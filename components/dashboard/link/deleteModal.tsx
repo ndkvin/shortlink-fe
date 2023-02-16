@@ -3,8 +3,6 @@ import Modal from "@components/dashboard/modal"
 import formAuth from "@helpers/formAuth"
 import { ChangeEvent, SetStateAction } from "react"
 
-
-
 interface IProps {
   open: boolean
   setOpen: React.Dispatch<SetStateAction<boolean>>
@@ -13,7 +11,6 @@ interface IProps {
   edit: boolean
   setEdit: React.Dispatch<SetStateAction<boolean>>
 }
-
 
 export default function DeleteModal({ open, setOpen, id, link, edit, setEdit}: IProps): JSX.Element {
   async function deleteLink(e: ChangeEvent<HTMLFormElement>) {

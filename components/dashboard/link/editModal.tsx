@@ -17,7 +17,6 @@ interface IProps {
   setEdit: React.Dispatch<SetStateAction<boolean>>
 }
 
-
 export default function EditModal({ open, setOpen, data, edit, setEdit }: IProps): JSX.Element {
   const [link, setLink] = useState(data.link)
   const [slug, setSlug] = useState(data.slug)
@@ -44,7 +43,6 @@ export default function EditModal({ open, setOpen, data, edit, setEdit }: IProps
       setOpen={setOpen}
     >
       <>
-
         <h3 className="text-lg font-medium leading-6 text-gray-800 capitalize dark:text-white" id="modal-title">
           Edit link
         </h3>

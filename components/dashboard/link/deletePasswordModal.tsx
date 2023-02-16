@@ -13,7 +13,6 @@ interface IProps {
   setEdit: React.Dispatch<SetStateAction<boolean>>
 }
 
-
 export default function DeletePasswordModal({ open, setOpen, id, link, edit, setEdit }: IProps): JSX.Element {
   const [visible, setVisible] = useState(false)
   const [password, setPassword] = useState("")

@@ -1,12 +1,13 @@
 import config from "@helpers/config"
 import { SetStateAction, useEffect, useState } from "react"
-import { AiFillEdit, AiOutlineQrcode, AiTwotoneDelete } from "react-icons/ai"
+import { AiFillEdit, AiOutlineQrcode, AiTwotoneDelete, AiFillLock, AiFillUnlock } from "react-icons/ai"
 import EditModal from "@components/dashboard/link/editModal"
 import QrModal from "./qrModal"
-import { success } from "@components/common/toast"
+import { error, success } from "@components/common/toast"
 import PasswordModal from "./passwordModal"
 import { RiLockPasswordLine } from "react-icons/ri"
 import DeleteModal from "@components/dashboard/link/deleteModal"
+import formAuth from "@helpers/formAuth"
 
 interface ILink {
   created_at: string
@@ -18,13 +19,11 @@ interface ILink {
   qr: string
 }
 
-
 interface IProps {
   data: ILink
   edit: boolean
   setEdit: React.Dispatch<SetStateAction<boolean>>
 }
-
 
 export default function LinkCard({ data, edit, setEdit }: IProps): JSX.Element {
   const [openEditLink, setOpenEditLink] = useState(false)
@@ -33,6 +32,28 @@ export default function LinkCard({ data, edit, setEdit }: IProps): JSX.Element {
   const [openPassword, setOpenPassword] = useState(false)
   const [openDropdown, setOpenDropdown] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
+  const [lock, setLock] = useState(data.is_lock)
+
+  const lockLink = async () => {
+    if (!lock) {
+      const res = await formAuth("POST", `/link/lock/${data.id}`, JSON.stringify({}))
+      if (res.code == 200) {
+        success(res.message)
+        setEdit(!edit)
+      } else {
+        error(res.message)
+      }
+    } else {
+      const res = await formAuth("DELETE", `/link/lock/${data.id}`, JSON.stringify({}))
+      if (res.code == 200) {
+        success(res.message)
+        setEdit(!edit)
+      } else {
+        error(res.message)
+      }
+    }
+    setLock(!lock)
+  } 
 
   const copy = () => {
     navigator.clipboard.writeText(`${config.BASE_URL}/${data.slug}`)
@@ -84,6 +105,27 @@ export default function LinkCard({ data, edit, setEdit }: IProps): JSX.Element {
                   </span>
                 </button>
 
+                <button onClick={lockLink} className="w-full flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                  {
+                    lock ?
+                      <AiFillLock size={20} className="mr-1" />
+                      :
+                      <AiFillUnlock size={20} className="mr-1" />
+                  }
+
+                  <span className="mx-1">
+                    {
+                      lock ?
+                        <>
+                          Unlock
+                        </>
+                        :
+                        <>
+                          lock
+                        </>}
+                  </span>
+                </button>
+
                 <button onClick={e => setOpenDelete(true)} className="w-full flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                   <AiTwotoneDelete size={20} className="mr-1" />
 
@@ -128,7 +170,7 @@ export default function LinkCard({ data, edit, setEdit }: IProps): JSX.Element {
           setEdit={setEdit}
           password={data.password}
         />
-        <DeleteModal 
+        <DeleteModal
           open={openDelete}
           setOpen={setOpenDelete}
           id={data.id}

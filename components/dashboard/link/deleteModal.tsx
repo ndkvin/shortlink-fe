@@ -4,15 +4,13 @@ import formAuth from "@helpers/formAuth"
 import { ChangeEvent, SetStateAction } from "react"
 
 interface IProps {
-  open: boolean
-  setOpen: React.Dispatch<SetStateAction<boolean>>
   id: string
   link: string
   edit: boolean
   setEdit: React.Dispatch<SetStateAction<boolean>>
 }
 
-export default function DeleteModal({ open, setOpen, id, link, edit, setEdit}: IProps): JSX.Element {
+export default function DeleteModal({ id, link, edit, setEdit}: IProps): JSX.Element {
   async function deleteLink(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault()
 
@@ -28,8 +26,8 @@ export default function DeleteModal({ open, setOpen, id, link, edit, setEdit}: I
 
   return (
     <Modal
-      open={open}
-      setOpen={setOpen}
+      id={id}
+      action="delete"
     >
       <>
 

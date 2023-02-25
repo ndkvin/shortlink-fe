@@ -3,16 +3,15 @@ import Modal from "@components/dashboard/modal"
 import config from "@helpers/config"
 
 interface IProps {
-  open: boolean
-  setOpen: React.Dispatch<SetStateAction<boolean>>
+  id: string
   qr: string
 }
 
-export default function QrModal({ open, setOpen, qr }: IProps): JSX.Element {
+export default function QrModal({ qr, id }: IProps): JSX.Element {
   return (
     <Modal
-      open={open}
-      setOpen={setOpen}
+      id={id}
+      action="qr"
     >
       <>
         <h3 className="text-center mx-auto text-lg font-bold leading-6 text-gray-800 capitalize dark:text-white" id="modal-title">

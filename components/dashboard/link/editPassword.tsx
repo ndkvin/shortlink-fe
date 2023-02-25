@@ -44,8 +44,8 @@ export default function SetPassword({ open, setOpen, id, link, edit, setEdit }: 
   return (
     <>
       <Modal
-        open={open}
-        setOpen={setOpen}
+        id="123"
+        action="edit"
       >
         <>
           <h3 className="text-lg font-medium leading-6 text-gray-800 capitalize dark:text-white" id="modal-title">

@@ -32,8 +32,8 @@ export default function CreateLinkModal(): JSX.Element {
         Create New Link
       </button>
       <Modal 
-        open={openCreateLink} 
-        setOpen={setOpenCreateLink}
+        id="123"
+        action="edit"
       >
         <>
           <h3 className="text-lg font-medium leading-6 text-gray-800 capitalize dark:text-white" id="modal-title">

@@ -1,7 +1,8 @@
 import { error, success } from "@components/common/toast"
 import Modal from "@components/dashboard/modal"
 import formAuth from "@helpers/formAuth"
-import { ChangeEvent, SetStateAction, useState } from "react"
+import { ChangeEvent, SetStateAction, useContext, useState } from "react"
+import { StateContext } from "@providers/stateProvider"
 
 interface ILink {
   id: string
@@ -10,14 +11,12 @@ interface ILink {
 }
 
 interface IProps {
-  open: boolean
-  setOpen: React.Dispatch<SetStateAction<boolean>>
   data: ILink
   edit: boolean
   setEdit: React.Dispatch<SetStateAction<boolean>>
 }
 
-export default function EditModal({ open, setOpen, data, edit, setEdit }: IProps): JSX.Element {
+export default function EditModal({data, edit, setEdit }: IProps): JSX.Element {
   const [link, setLink] = useState(data.link)
   const [slug, setSlug] = useState(data.slug)
 
@@ -39,8 +38,8 @@ export default function EditModal({ open, setOpen, data, edit, setEdit }: IProps
 
   return (
     <Modal
-      open={open}
-      setOpen={setOpen}
+      id={data.id}
+      action="edit"
     >
       <>
         <h3 className="text-lg font-medium leading-6 text-gray-800 capitalize dark:text-white" id="modal-title">

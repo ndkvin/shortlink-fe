@@ -24,7 +24,6 @@ export default function Link(): JSX.Element {
     async function fetchData() {
       const links = await getAuth("/link")
       setLinks(links.data)
-      console.log(links.data[0])
     }
 
     fetchData()

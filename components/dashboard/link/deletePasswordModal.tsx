@@ -36,8 +36,8 @@ export default function DeletePasswordModal({ open, setOpen, id, link, edit, set
 
   return (
     <Modal
-      open={open}
-      setOpen={setOpen}
+      id="123"
+      action="edit"
     >
       <>
 

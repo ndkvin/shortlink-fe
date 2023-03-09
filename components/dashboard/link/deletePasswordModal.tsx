@@ -1,21 +1,18 @@
 import { error, success } from "@components/common/toast"
 import Modal from "@components/dashboard/modal"
 import formAuth from "@helpers/formAuth"
-import { ChangeEvent, SetStateAction, useState } from "react"
+import { StateContext } from "@providers/stateProvider"
+import { ChangeEvent, useContext, useState } from "react"
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai"
 
 interface IProps {
-  open: boolean
-  setOpen: React.Dispatch<SetStateAction<boolean>>
   id: string
-  link: string
-  edit: boolean
-  setEdit: React.Dispatch<SetStateAction<boolean>>
 }
 
-export default function DeletePasswordModal({ open, setOpen, id, link, edit, setEdit }: IProps): JSX.Element {
+export default function DeletePasswordModal({ id }: IProps): JSX.Element {
   const [visible, setVisible] = useState(false)
   const [password, setPassword] = useState("")
+  const { edit, setEdit } = useContext(StateContext)
 
   async function deletePassword(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -36,11 +33,10 @@ export default function DeletePasswordModal({ open, setOpen, id, link, edit, set
 
   return (
     <Modal
-      id="123"
-      action="edit"
+      id={id}
+      action="del-pass"
     >
       <>
-
         <h3 className="text-lg font-medium leading-6 text-gray-800 capitalize dark:text-white" id="modal-title">
           Delete Password Link
         </h3>

@@ -1,7 +1,7 @@
 import { error, success } from "@components/common/toast"
 import Modal from "@components/dashboard/modal"
 import formAuth from "@helpers/formAuth"
-import { ChangeEvent, SetStateAction, useContext, useState } from "react"
+import { ChangeEvent, useContext, useState } from "react"
 import { StateContext } from "@providers/stateProvider"
 
 interface ILink {
@@ -12,13 +12,12 @@ interface ILink {
 
 interface IProps {
   data: ILink
-  edit: boolean
-  setEdit: React.Dispatch<SetStateAction<boolean>>
 }
 
-export default function EditModal({data, edit, setEdit }: IProps): JSX.Element {
+export default function EditModal({data }: IProps): JSX.Element {
   const [link, setLink] = useState(data.link)
   const [slug, setSlug] = useState(data.slug)
+  const { edit, setEdit } = useContext(StateContext)
 
   async function editLink(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault()

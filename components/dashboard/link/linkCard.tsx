@@ -1,5 +1,5 @@
 import config from "@helpers/config"
-import React, { SetStateAction, useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import { AiFillEdit, AiOutlineQrcode, AiTwotoneDelete, AiFillLock, AiFillUnlock } from "react-icons/ai"
 import EditModal from "@components/dashboard/link/editModal"
 import QrModal from "./qrModal"
@@ -22,15 +22,12 @@ interface ILink {
 
 interface IProps {
   data: ILink
-  edit: boolean
-  setEdit: React.Dispatch<SetStateAction<boolean>>
 }
 
-export default function LinkCard({ data, edit, setEdit }: IProps): JSX.Element {
-  const [date, setDate] = useState("")
-  const [openPassword, setOpenPassword] = useState(false)
+export default function LinkCard({ data }: IProps): JSX.Element {
   const [openDropdown, setOpenDropdown] = useState(false)
   const [lock, setLock] = useState(data.is_lock)
+  const { setId, setAction, edit, setEdit } = useContext(StateContext)
 
   const lockLink = async () => {
     if (!lock) {
@@ -53,22 +50,17 @@ export default function LinkCard({ data, edit, setEdit }: IProps): JSX.Element {
     setLock(!lock)
   }
 
-  const { setId, setAction } = useContext(StateContext)
+
 
   const copy = () => {
     navigator.clipboard.writeText(`${config.BASE_URL}/${data.slug}`)
     success("Link Copied")
   }
 
-  useEffect(() => {
-    const date = new Date(data.created_at)
-    setDate(date.toDateString())
-  })
-
   return (
     <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-5">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-light text-gray-600 dark:text-gray-400">{date}</span>
+        <span className="text-sm font-light text-gray-600 dark:text-gray-400">{ new Date(data.created_at).toDateString() }</span>
         <div className="flex">
           <div className="relative inline-block ">
             <button onClick={e => setOpenDropdown(!openDropdown)} className="relative z-10 block p-2 text-gray-700 bg-white border border-transparent rounded-md dark:text-white focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:bg-gray-800 focus:outline-none">
@@ -102,7 +94,11 @@ export default function LinkCard({ data, edit, setEdit }: IProps): JSX.Element {
                 </span>
               </button>
 
-              <button onClick={e => setOpenPassword(true)} className="w-full flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+              <button onClick={e => {
+                setId(data.id);
+                setAction("password")
+              }}
+                className="w-full flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                 <RiLockPasswordLine size={20} className="mr-1" />
 
                 <span className="mx-1">
@@ -159,27 +155,18 @@ export default function LinkCard({ data, edit, setEdit }: IProps): JSX.Element {
           link: data.link,
           slug: data.slug
         }}
-        edit={edit}
-        setEdit={setEdit}
       />
       <QrModal
         id={data.id}
         qr={data.qr}
       />
       <PasswordModal
-        open={openPassword}
-        setOpen={setOpenPassword}
         id={data.id}
-        edit={edit}
-        link={data.link}
-        setEdit={setEdit}
         password={data.password}
       />
       <DeleteModal
         id={data.id}
         link={`${config.BASE_URL}/${data.slug}`}
-        edit={edit}
-        setEdit={setEdit}
       />
     </div>
   )

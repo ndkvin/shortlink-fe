@@ -1,10 +1,10 @@
-import nookies from 'nookies'
 import config from "@helpers/config"
 import Dashboard from "@layouts/dashboard"
 import { Context } from "vm"
 import LinkCard from '@components/dashboard/link/linkCard'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import getAuth from '@helpers/getAuth'
+import { StateContext } from '@providers/stateProvider'
 
 interface ILink {
   created_at: string
@@ -18,7 +18,8 @@ interface ILink {
 
 export default function Link(): JSX.Element {
   const [links, setLinks] = useState([])
-  const [edit, setEdit] = useState(false)
+
+  const { edit } = useContext(StateContext)
 
   useEffect(() => {
     async function fetchData() {
@@ -32,7 +33,7 @@ export default function Link(): JSX.Element {
   return (
     <Dashboard>
       <>
-        {links.map((link: ILink, index: number) => <LinkCard key={index} data={link} edit={edit} setEdit={setEdit} />)}
+        {links.map((link: ILink, index: number) => <LinkCard key={index} data={link} />)}
       </>
     </Dashboard>
   )

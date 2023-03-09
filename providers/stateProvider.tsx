@@ -9,6 +9,8 @@ type ContextType = {
   setId: Dispatch<SetStateAction<string>>
   action: string
   setAction: Dispatch<SetStateAction<string>>
+  edit: boolean
+  setEdit: Dispatch<SetStateAction<boolean>>
 }
 
 export const StateContext = createContext<ContextType>({
@@ -16,16 +18,22 @@ export const StateContext = createContext<ContextType>({
   setId: () => { },
   action: "",
   setAction: () => { },
+  edit: false,
+  setEdit: () => { },
 })
 
 export function StateProvider({ children }: IProps) {
   const [id, setId] = useState("")
   const [action, setAction] = useState("")
+  const [edit, setEdit] = useState(false)
+
   const value: ContextType = {
     id,
     setId,
     action,
-    setAction
+    setAction,
+    edit,
+    setEdit
   }
 
   return (

@@ -1,25 +1,21 @@
-import { ChangeEvent, SetStateAction, useState } from "react"
+import { ChangeEvent, useContext, useState } from "react"
 import Modal from "../modal"
 import formAuth from "@helpers/formAuth"
 import { error, success } from "@components/common/toast"
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai"
 import DeletePasswordModal from "./deletePasswordModal"
+import { StateContext } from "@providers/stateProvider"
 
 interface IProps {
-  open: boolean
-  setOpen: React.Dispatch<SetStateAction<boolean>>
   id: string
-  link: string
-  edit: boolean
-  setEdit: React.Dispatch<SetStateAction<boolean>>
 }
 
-export default function SetPassword({ open, setOpen, id, link, edit, setEdit }: IProps): JSX.Element {
+export default function SetPassword({ id }: IProps): JSX.Element {
   const [oldPassword, setOldPassword] = useState("")
   const [newPassword, setNewPassword] = useState("")
   const [oldVisible, setOldVisible] = useState(false)
   const [newVisible, setNewVisible] = useState(false)
-  const [openDelete, setOpenDelete] = useState(false)
+  const { edit, setEdit } = useContext(StateContext)
 
   async function submitPassword(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -40,12 +36,13 @@ export default function SetPassword({ open, setOpen, id, link, edit, setEdit }: 
       error(res.message)
     }
   }
+  const { setId, setAction } = useContext(StateContext)
 
   return (
     <>
       <Modal
-        id="123"
-        action="edit"
+        id={id}
+        action={"password"}
       >
         <>
           <h3 className="text-lg font-medium leading-6 text-gray-800 capitalize dark:text-white" id="modal-title">
@@ -92,7 +89,10 @@ export default function SetPassword({ open, setOpen, id, link, edit, setEdit }: 
             <p className="mt-3 text-xs text-gray-400 dark:text-gray-600">The password must contain uppercase, lowercase, numbers and special character, with 8 characters length</p>
 
             <div className="mt-4 sm:items-center mr-2 flex">
-              <button onClick={e => setOpenDelete(true)} type="button" className="w-full px-4 py-2 text-sm font-medium tracking-wide text-gray-700 capitalize transition-colors duration-300 transform border border-gray-200 rounded-md sm:w-1/2 sm:mx-2 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40">
+              <button onClick={e => {
+                setId(id);
+                setAction("del-pass")
+              }} type="button" className="w-full px-4 py-2 text-sm font-medium tracking-wide text-gray-700 capitalize transition-colors duration-300 transform border border-gray-200 rounded-md sm:w-1/2 sm:mx-2 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40">
                 Remove Pass
               </button>
               <button type="submit" className="mx-auto py-2 mt-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md sm:mt-0 sm:w-1/2 sm:mx-2 hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40">
@@ -102,13 +102,8 @@ export default function SetPassword({ open, setOpen, id, link, edit, setEdit }: 
           </form>
         </>
       </Modal >
-      <DeletePasswordModal 
-        open={openDelete}
-        setOpen={setOpenDelete}
-        link={link}
+      <DeletePasswordModal
         id={id}
-        edit={edit}
-        setEdit={setEdit}
       />
     </>
   )

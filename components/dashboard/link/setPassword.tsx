@@ -1,20 +1,18 @@
-import { ChangeEvent, SetStateAction, useState } from "react"
+import { ChangeEvent, useContext, useState } from "react"
 import Modal from "../modal"
 import formAuth from "@helpers/formAuth"
 import { error, success } from "@components/common/toast"
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai"
+import { StateContext } from "@providers/stateProvider"
 
 interface IProps {
-  open: boolean
-  setOpen: React.Dispatch<SetStateAction<boolean>>
   id: string
-  edit: boolean
-  setEdit: React.Dispatch<SetStateAction<boolean>>
 }
 
-export default function SetPassword({ open, setOpen, id, edit, setEdit }: IProps): JSX.Element {
+export default function SetPassword({ id }: IProps): JSX.Element {
   const [password, setPassword] = useState("")
   const [visible, setVisible] = useState(false)
+  const { edit, setEdit } = useContext(StateContext)
 
   async function submitPassword(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -34,8 +32,8 @@ export default function SetPassword({ open, setOpen, id, edit, setEdit }: IProps
 
   return (
     <Modal
-      open={open}
-      setOpen={setOpen}
+      id={id}
+      action={"password"}
     >
       <>
         <h3 className="text-lg font-medium leading-6 text-gray-800 capitalize dark:text-white" id="modal-title">

@@ -1,16 +1,17 @@
 import { error, success } from "@components/common/toast"
 import Modal from "@components/dashboard/modal"
 import formAuth from "@helpers/formAuth"
-import { ChangeEvent, SetStateAction } from "react"
+import { StateContext } from "@providers/stateProvider"
+import { ChangeEvent, useContext } from "react"
 
 interface IProps {
   id: string
   link: string
-  edit: boolean
-  setEdit: React.Dispatch<SetStateAction<boolean>>
 }
 
-export default function DeleteModal({ id, link, edit, setEdit}: IProps): JSX.Element {
+export default function DeleteModal({ id, link }: IProps): JSX.Element {
+  const { edit, setEdit } = useContext(StateContext)
+
   async function deleteLink(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault()
 

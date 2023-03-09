@@ -1,4 +1,3 @@
-import { SetStateAction } from "react"
 import Modal from "@components/dashboard/modal"
 import config from "@helpers/config"
 

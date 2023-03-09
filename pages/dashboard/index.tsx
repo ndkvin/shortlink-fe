@@ -1,12 +1,9 @@
 import DashboardLayout from "@layouts/dashboard"
-import { useState } from "react"
 import CreateLinkModal from "@components/dashboard/dashboard/createLinkModal"
 import { Context } from "vm"
 import config from "@helpers/config"
 
 export default function Dashboard(): JSX.Element {
-  const [open, setOpen] = useState(false)
-
   return (
     <DashboardLayout>
       <>

@@ -1,6 +1,6 @@
 import { useOpenStatus } from "@hooks/index"
 import { StateContext } from "@providers/stateProvider"
-import { SetStateAction, useContext, useState } from "react"
+import {  useContext } from "react"
 
 interface IProps {
   children: JSX.Element
@@ -20,7 +20,7 @@ export default function Modal({ children, id, action }: IProps): JSX.Element {
         <span className="hidden sm:inline-block sm:h-screen sm:align-middle" aria-hidden="true">&#8203;</span>
 
         <div className="relative inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl dark:bg-gray-900 sm:my-8 sm:w-full sm:max-w-sm sm:p-6 sm:align-middle">
-          <button onClick={e => {
+          <button onClick={() => {
             setId("")
             setAction("")
           }} type="button" className="text-gray-500 dark:text-gray-400 fixed top-2 right-0 rounded-md p-2 inline-flex items-center justify-center hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">

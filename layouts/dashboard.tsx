@@ -38,12 +38,16 @@ export default function Dashboard({ children }: IProps) {
         <div className="flex">
           {
             open ?
-              <Aside name={name} />
-              :
+              <Aside 
+                name={name} 
+                open={open}
+                setOpen={setOpen}  
+              />
+            :
               <AsideCollapse />
           }
 
-          <div className={open ? "w-full text-gray-700 bg-white dark:bg-gray-900 dark:border-gray-600 dark:text-gray-200 ml-64" : "w-full text-gray-700 bg-white dark:bg-gray-900 dark:border-gray-600 dark:text-gray-200 ml-16"}>
+          <div className={open ? "w-full text-gray-700 bg-white dark:bg-gray-900 dark:border-gray-600 dark:text-gray-200 md:ml-64" : "w-[100vw] text-gray-700 bg-white dark:bg-gray-900 dark:border-gray-600 dark:text-gray-200 md:ml-16"}>
             <Navbar sideOpen={open} setSideOpen={setOpen} setToken={setToken} name={name} />
             <ToastContainer />
             <div className="p-4 min-h-screen">

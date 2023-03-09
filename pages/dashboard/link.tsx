@@ -32,9 +32,9 @@ export default function Link(): JSX.Element {
 
   return (
     <Dashboard>
-      <>
+      <div className="flex flex-wrap">
         {links.map((link: ILink, index: number) => <LinkCard key={index} data={link} />)}
-      </>
+      </div>
     </Dashboard>
   )
 }

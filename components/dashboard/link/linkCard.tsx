@@ -58,12 +58,12 @@ export default function LinkCard({ data }: IProps): JSX.Element {
   }
 
   return (
-    <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-5">
+    <div className="min-w-full md:min-w-[30%] px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-5 mx-0 md:mx-2">
       <div className="flex items-center justify-between">
         <span className="text-sm font-light text-gray-600 dark:text-gray-400">{ new Date(data.created_at).toDateString() }</span>
         <div className="flex">
           <div className="relative inline-block ">
-            <button onClick={e => setOpenDropdown(!openDropdown)} className="relative z-10 block p-2 text-gray-700 bg-white border border-transparent rounded-md dark:text-white focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:bg-gray-800 focus:outline-none">
+            <button onClick={() => setOpenDropdown(!openDropdown)} className="relative z-10 block p-2 text-gray-700 bg-white border border-transparent rounded-md dark:text-white focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:bg-gray-800 focus:outline-none">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
               </svg>
@@ -72,7 +72,7 @@ export default function LinkCard({ data }: IProps): JSX.Element {
             <div
               className={openDropdown ? "absolute right-0 w-48 z-20 py-2 mt-2 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800" : "hidden absolute right-0 z-20 w-48 py-2 mt-2 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800"}
             >
-              <button onClick={e => {
+              <button onClick={() => {
                 setId(data.id);
                 setAction("edit")
               }} className="w-full flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
@@ -83,7 +83,7 @@ export default function LinkCard({ data }: IProps): JSX.Element {
                 </span>
               </button>
 
-              <button onClick={e => {
+              <button onClick={() => {
                 setId(data.id);
                 setAction("qr")
               }} className="w-full flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
@@ -94,7 +94,7 @@ export default function LinkCard({ data }: IProps): JSX.Element {
                 </span>
               </button>
 
-              <button onClick={e => {
+              <button onClick={() => {
                 setId(data.id);
                 setAction("password")
               }}
@@ -127,7 +127,7 @@ export default function LinkCard({ data }: IProps): JSX.Element {
                 </span>
               </button>
 
-              <button onClick={e => {
+              <button onClick={() => {
                 setId(data.id);
                 setAction("delete")
               }} className="w-full flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">

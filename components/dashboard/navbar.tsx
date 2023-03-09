@@ -29,7 +29,7 @@ export default function Navbar({ sideOpen, setSideOpen, setToken, name }: IProps
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-between">
 
-              <button onClick={e => setSideOpen(!sideOpen)} type="button" className='translate-x-0 opacity-100 text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400 mr-4' aria-label="toggle menu">
+              <button onClick={() => setSideOpen(!sideOpen)} type="button" className='translate-x-0 opacity-100 text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400 mr-4' aria-label="toggle menu">
                 {
                   sideOpen ?
                     <CgClose size={24} className="font-bold"/>
@@ -42,7 +42,7 @@ export default function Navbar({ sideOpen, setSideOpen, setToken, name }: IProps
             </div>
             <div className="flex items-center mt-4 md:mt-0">
               <div className="relative flex">
-                <button onClick={(e) => setDropdownOpen(!dropdownOpen)} type="button" className="flex items-center px-3 py-2 rounded-md focus:outline-none hover:bg-gray-100 dark:hover:bg-gray-700" aria-label="toggle profile dropdown">
+                <button onClick={() => setDropdownOpen(!dropdownOpen)} type="button" className="flex items-center px-3 py-2 rounded-md focus:outline-none hover:bg-gray-100 dark:hover:bg-gray-700" aria-label="toggle profile dropdown">
                   <CgProfile size={24} className="text-gray-400" />
 
                   <h3 className="mx-2 text-gray-700 dark:text-gray-200">Hi, {name}</h3>
